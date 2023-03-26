@@ -1,0 +1,42 @@
+{% extends 'layouts/base.html' %} {% load static %} {% block customCSS %}
+<link rel="stylesheet" href="{% static 'css/list-items.css' %}" />
+{% endblock %} {% block content %}
+
+<h1>Productos</h1>
+
+<section class="section-products">
+  <div class="container">
+    <div class="row">
+      {% for producto in productos %}
+
+      <!-- Single Product -->
+      <div class="col-md-6 col-lg-4 col-xl-3">
+        <div id="product-1" class="single-product">
+          <div class="part-1">
+            <img
+              src="{{producto.image.url}}"
+              alt="imagen producto"
+              width="150"
+              height="150"
+            />
+          </div>
+          <div class="part-2">
+            <h3 class="product-title">{{producto.nombre}}</h3>
+            <h4 class="product-price">${{producto.precio|floatformat:2}}</h4>
+            <button class="update-cart" data-producto="{{producto.id}}" data-action="add">
+              Add to cart
+            </button>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% endblock %}
+
+
+
+{% block customJavascript %}
+{% endblock %}

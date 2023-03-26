@@ -1,0 +1,66 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">ENERGY S.A Soporte Tecnico 🔧</a>
+  <button
+    class="navbar-toggler"
+    type="button"
+    data-toggle="collapse"
+    data-target="#navbarNavDropdown"
+    aria-controls="navbarNavDropdown"
+    aria-expanded="false"
+    aria-label="Toggle navigation"
+  >
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'index_page' %}">Home</a>
+      </li>
+
+      {% if request.user.rol == 'Sistemas' %}
+      
+      <li class="nav-item">
+        <a class="nav-link" href="#">Gestionar Departamentos</a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="#">Gestionar Personas</a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="#">Equipos</a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="#">Reportar Problemas</a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="#">Problemas reportados</a>
+      </li>
+      {% endif %}
+
+
+      {% if request.user.rol == 'Soporte' %}
+      <li class="nav-item">
+        <a class="nav-link" href="#">Soporte feature</a>
+      </li>
+      {% endif %}
+
+
+      {% if request.user.rol == 'JefeSoporte' %}
+      <li class="nav-item">
+        <a class="nav-link" href="#">JefeSoporte feature</a>
+      </li>
+      {% endif %}
+
+      
+
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'logout' %}"
+          >({{ request.user.first_name }} - {{request.user.rol}})Logout</a
+        >
+      </li>
+    </ul>
+  </div>
+</nav>
