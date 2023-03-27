@@ -21,5 +21,7 @@ urlpatterns = [
     path("", include('autenticacion.urls')),
     #
     path("", include('departamentos.urls')),
+    path("", include('empleados.urls')),
+
     
 ]

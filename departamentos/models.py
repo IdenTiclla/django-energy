@@ -4,7 +4,7 @@ from django.db import models
 
 
 class Departamento(models.Model):
-    nombre = models.CharField(max_length=50)
+    nombre = models.CharField(max_length=50, unique=True)
     ubicacion = models.CharField(max_length=50)
 
     fecha_creacion = models.DateField(auto_now=True)

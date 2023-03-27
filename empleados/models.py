@@ -6,7 +6,7 @@ from departamentos.models import Departamento
 class Empleado(models.Model):
     nombre = models.CharField(max_length=50)
     apellido = models.CharField(max_length=50)
-    ci = models.CharField(max_length=50)
+    ci = models.CharField(max_length=50, unique=True)
     telefono = models.CharField(max_length=50)
     domicilio = models.CharField(max_length=50)
     sueldo = models.CharField(max_length=50)
