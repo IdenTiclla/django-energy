@@ -1,10 +1,10 @@
 {% extends 'layouts/base.html' %}
 
 {% block content %}
-<h1>Empleados</h1>
+<h1>Actualizar Tecnico</h1>
 <div class="row">
   <div class="col-md-5">
-    <form action="/empleados/update/{{empleado.id}}" method="post">
+    <form action="/tecnicos/update/{{tecnico.id}}" method="post">
       {% csrf_token %}
 
       <div class="form-group">
@@ -15,7 +15,7 @@
           id="nombre"
           name="nombre"
           placeholder="Ingrese el nombre"
-          value="{{empleado.nombre}}"
+          value="{{tecnico.nombre}}"
         />
       </div>
 
@@ -27,7 +27,7 @@
           id="apellido"
           name="apellido"
           placeholder="Ingrese el apellido"
-          value="{{empleado.apellido}}"
+          value="{{tecnico.apellido}}"
         />
       </div>
 
@@ -40,7 +40,7 @@
           id="ci"
           name="ci"
           placeholder="Ingrese el ci"
-          value="{{empleado.ci}}"
+          value="{{tecnico.ci}}"
         />
       </div>
 
@@ -53,7 +53,7 @@
           id="telefono"
           name="telefono"
           placeholder="Ingrese el telefono"
-          value="{{empleado.telefono}}"
+          value="{{tecnico.telefono}}"
         />
       </div>
 
@@ -65,33 +65,16 @@
           id="domicilio"
           name="domicilio"
           placeholder="Ingrese ubicacion del domicilio"
-          value="{{empleado.domicilio}}"
+          value="{{tecnico.domicilio}}"
         />
       </div>
 
-      <div class="form-group">
-        <label for="sueldo">Seleccione el departamento</label>
-        <select name="departamento_id" class="form-select"  aria-label="Default select example">
-          {% for departamento in departamentos %}
-            <option value="{{departamento.id}}" {% if departamento.id == empleado.departamento.id %}selected{% endif %}>{{departamento.nombre}}</option>
-          {% endfor %}
-        </select>
-      </div>
+      
 
-      <div class="form-group">
-        <label for="nombre">Sueldo Bs</label>
-        <input
-          type="number"
-          class="form-control"
-          id="sueldo"
-          name="sueldo"
-          placeholder="Ingrese el sueldo"
-          value="{{empleado.sueldo}}"
-        />
-      </div>
+      
 
 
-      <button type="submit">Registrar Empleado</button>
+      <button type="submit">Actualizar Tecnico</button>
     </form>
   </div>
 </div>
