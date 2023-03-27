@@ -22,6 +22,6 @@ urlpatterns = [
     #
     path("", include('departamentos.urls')),
     path("", include('empleados.urls')),
-
+    path("", include('tecnicos.urls')),
     
 ]

@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     # my apps
     'autenticacion',
     'departamentos',
-    'empleados'
+    'empleados',
+    'tecnicos'
 ]
 
 MIDDLEWARE = [
