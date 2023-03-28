@@ -51,3 +51,12 @@ def solicitudes_realizadas(request):
     return render(request, "solicitudes/sistemas_solicitudes_realizadas.html", {
         'solicitudes': solicitudes
     })
+
+
+def ver_solicitud(request, solicitud_id):
+    solicitud = Solicitud.objects.get(id=solicitud_id)
+    print(solicitud_id)
+    print(solicitud)
+    return render(request, "solicitudes/ver_solicitud.html", {
+        'solicitud': solicitud
+    })

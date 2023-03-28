@@ -8,6 +8,9 @@ urlpatterns = [
 
     path('solicitudes_realizadas', views.solicitudes_realizadas),
 
+    path('ver/solicitud/<int:solicitud_id>', views.ver_solicitud),
+
+
     
 
     #path("solicitudes/update/<int:id_solicitud>", views.actualizar_solicitud),

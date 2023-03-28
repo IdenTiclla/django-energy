@@ -1,0 +1,30 @@
+{% extends 'layouts/base.html' %}
+
+{% block content %}
+<h1>Informacion de la solicitud</h1>
+<br>
+<h2>Equipo: {{solicitud.nombre_equipo}}</h2>
+
+<br>
+<h2>Problema: {{solicitud.problema}}</h2>
+
+<br>
+<h2>Empleado: {{solicitud.empleado.nombre}} {{solicitud.empleado.apellido}}</h2>
+
+<br>
+<h3>Tecnico Encargado: {{solicitud.tecnico.nombre}} {{solicitud.tecnico.apellido}}</h3>
+
+<br>
+<h4>Descripcion del problema</h4>
+<p>{{solicitud.descripcion}}</p>
+
+<br>
+<h4>Estado</h4>
+<p>{{solicitud.estado}}</p>
+
+<br>
+
+<h5>Fecha de solicitud: {{solicitud.fecha_creacion}}</h5>
+
+
+{% endblock %}
