@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'autenticacion',
     'departamentos',
     'empleados',
-    'tecnicos'
+    'tecnicos',
+    'solicitudes'
 ]
 
 MIDDLEWARE = [

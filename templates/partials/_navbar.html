@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">ENERGY S.A Soporte Tecnico 🔧</a>
+  <a class="navbar-brand" href="{% url 'index_page' %}">ENERGY S.A Soporte Tecnico 🔧</a>
   <button
     class="navbar-toggler"
     type="button"
@@ -31,9 +31,27 @@
         <a class="nav-link" href="/tecnicos">Tecnicos</a>
       </li>
 
-      <li class="nav-item">
-        <a class="nav-link" href="#">Reportar Problemas</a>
+
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Solicitudes
+        </a>
+        <ul class="dropdown-menu">
+          <li class="nav-item">
+            <a class="nav-link" href="/realizar_solicitud">Realizar Solicitud</a>
+          </li>
+
+          <li><a class="dropdown-item" href="/solicitudes_realizadas">Solicitudes Realizadas</a></li>
+
+          <li><a class="dropdown-item" href="/solicitudes_en_progreso">Solicitudes En progreso</a></li>
+
+          <li><a class="dropdown-item" href="/solicitudes_pendiente_aprobacion">Solicitudes pendiente aprobacion</a></li>
+
+          <li><a class="dropdown-item" href="/solicitudes_pendiente_aprobacion">Solicitudes aprobadas</a></li>
+        </ul>
       </li>
+
+      
 
       <li class="nav-item">
         <a class="nav-link" href="#">Problemas reportados</a>

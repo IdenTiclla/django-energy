@@ -1,0 +1,102 @@
+{% extends 'layouts/base.html' %}
+
+{% block content %}
+<h1>Realizar Solicitudes</h1>
+<div class="row">
+  <div class="col-md-5">
+    <form action="/realizar_solicitud" method="post">
+      {% csrf_token %}
+
+      <div class="form-group">
+        <label for="sueldo">Seleccione el empleado</label>
+        <select name="empleado_id" class="form-select"  aria-label="Default select example">
+          {% for empleado in empleados %}
+            <option value="{{empleado.id}}">{{empleado.nombre}} {{empleado.apellido}}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="sueldo">Seleccione el tecnico</label>
+        <select name="tecnico_id" class="form-select"  aria-label="Default select example">
+          {% for tecnico in tecnicos %}
+            <option value="{{tecnico.id}}">{{tecnico.nombre}} {{tecnico.apellido}}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+
+      <div class="form-group">
+        <label for="nombre">Nombre del equipo</label>
+        <input
+          type="text"
+          class="form-control"
+          id="nombre_equipo"
+          name="nombre_equipo"
+          placeholder="Ingrese el nombre"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="nombre">Ingrese el problema</label>
+        <input
+          type="text"
+          class="form-control"
+          id="problema"
+          name="problema"
+          placeholder="Ingrese el problema"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="">Descripcion de la falla</label>
+        <div class="form-floating">
+            <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea" name="descripcion"></textarea>
+        </div>  
+          
+      </div>
+
+    
+
+      <button type="submit">Registrar Solicitud</button>
+    </form>
+  </div>
+  <div class="col-md-7">
+    {% if solicitudes|length > 0 %}
+        <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Empleado</th>
+                <th scope="col">Tecnico</th>
+                <th scope="col">Equipo</th>
+                <th scope="col">Problema</th>
+                <th scope="col">Descripcion de la falla</th>
+                <th scope="col">Fecha Solicitud</th>
+                <th scope="col">Estado</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for solicitud in solicitudes %}
+              <tr>
+                  <th scope="row">{{solicitud.id}}</th>
+                  <td>{{solicitud.empleado.nombre}} {{solicitud.empleado.apellido}}</td>
+                  <td>{{solicitud.tecnico.nombre}} {{solicitud.tecnico.apellido}}</td>
+                  <td>{{solicitud.nombre_equipo}}</td>
+                  
+                  <td>{{solicitud.problema}}</td>
+                  
+                  <td>{{solicitud.descripcion}}</td>
+                  <td>{{solicitud.fecha_creacion}}</td>
+                  <td>{{solicitud.estado}}</td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+    {% else%}
+        <h1>No hay Solicitudes registrados!</h1>
+    {% endif %}
+    
+  </div>
+</div>
+{% endblock %}
