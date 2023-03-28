@@ -60,3 +60,20 @@ def ver_solicitud(request, solicitud_id):
     return render(request, "solicitudes/ver_solicitud.html", {
         'solicitud': solicitud
     })
+
+def solicitudes_en_progreso(request):
+    solicitudes = Solicitud.objects.filter(estado="En progreso")
+    return render(request, "solicitudes/sistemas_solicitudes_en_progreso.html", {
+        'solicitudes': solicitudes
+    })
+
+
+def poner_solicitud_en_progreso(request, solicitud_id):
+    solicitud = Solicitud.objects.get(id=solicitud_id)
+    print(solicitud_id)
+    print(solicitud)
+    # cambiando el estado a En progreso
+    solicitud.estado = "En progreso"
+    solicitud.save()
+    messages.add_message(request=request, level=messages.SUCCESS, message="Solicitud puesta en  progreso!")
+    return redirect('/solicitudes_en_progreso')

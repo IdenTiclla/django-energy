@@ -37,9 +37,8 @@
           Solicitudes
         </a>
         <ul class="dropdown-menu">
-          <li class="nav-item">
-            <a class="nav-link" href="/realizar_solicitud">Realizar Solicitud</a>
-          </li>
+
+          <li><a class="dropdown-item" href="/realizar_solicitud">Realizar Solicitud</a></li>
 
           <li><a class="dropdown-item" href="/solicitudes_realizadas">Solicitudes Realizadas</a></li>
 
@@ -62,6 +61,24 @@
       {% if request.user.rol == 'Soporte' %}
       <li class="nav-item">
         <a class="nav-link" href="#">Soporte feature</a>
+      </li>
+
+
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Solicitudes
+        </a>
+        <ul class="dropdown-menu">
+          
+
+          <li><a class="dropdown-item" href="/solicitudes_realizadas">Solicitudes Realizadas</a></li>
+
+          <li><a class="dropdown-item" href="/solicitudes_en_progreso">Solicitudes En progreso</a></li>
+
+          <li><a class="dropdown-item" href="/solicitudes_pendiente_aprobacion">Solicitudes pendiente aprobacion</a></li>
+
+          <li><a class="dropdown-item" href="/solicitudes_pendiente_aprobacion">Solicitudes aprobadas</a></li>
+        </ul>
       </li>
       {% endif %}
 

@@ -19,12 +19,24 @@
 <p>{{solicitud.descripcion}}</p>
 
 <br>
+
+<h5>Fecha de solicitud: {{solicitud.fecha_creacion}}</h5>
+
+<br>
 <h4>Estado</h4>
 <p>{{solicitud.estado}}</p>
 
-<br>
 
-<h5>Fecha de solicitud: {{solicitud.fecha_creacion}}</h5>
+{% if request.user.rol == 'Soporte' %}
+    {% if solicitud.estado == 'Solicitado' %}
+    <a href="/poner_solicitud_en_progreso/solicitud/{{solicitud.id}}" class="btn btn-primary btn-big">Poner en progreso</a>
+
+    {% elif solicitud.estado == 'En progreso' %}
+        <a href="/agregar_solucion/solicitud/{{solicitud.id}}" class="btn btn-primary btn-big">Agregar Solucion</a>
+    {% endif %}
+
+{% endif %}
+
 
 
 {% endblock %}

@@ -11,6 +11,14 @@ urlpatterns = [
     path('ver/solicitud/<int:solicitud_id>', views.ver_solicitud),
 
 
+    path('solicitudes_en_progreso', views.solicitudes_en_progreso),
+
+
+    # para soporte cambiar los estados
+
+    path("poner_solicitud_en_progreso/solicitud/<int:solicitud_id>", views.poner_solicitud_en_progreso),
+
+
     
 
     #path("solicitudes/update/<int:id_solicitud>", views.actualizar_solicitud),
