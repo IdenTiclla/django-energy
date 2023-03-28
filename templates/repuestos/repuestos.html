@@ -1,0 +1,72 @@
+{% extends 'layouts/base.html' %}
+
+{% block content %}
+<h1>Repuestos</h1>
+<div class="row">
+  <div class="col-md-5">
+    <form action="/repuestos" method="post">
+      {% csrf_token %}
+
+      <div class="form-group">
+        <label for="nombre">Nombre</label>
+        <input
+          type="text"
+          class="form-control"
+          id="nombre"
+          name="nombre"
+          placeholder="Ingrese el nombre"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="nombre">Descripcion</label>
+        <input
+          type="text"
+          class="form-control"
+          id="descripcion"
+          name="descripcion"
+          placeholder="Ingrese la descripcion"
+        />
+      </div>
+
+
+      
+
+      <button type="submit">Registrar Repuesto</button>
+    </form>
+  </div>
+  <div class="col-md-7">
+    {% if repuestos|length > 0 %}
+        <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Descripcion</th>
+
+
+              </tr>
+            </thead>
+            <tbody>
+              {% for repuesto in repuestos %}
+              <tr>
+                  <th scope="row">{{repuesto.id}}</th>
+                  <td>{{repuesto.nombre}}</td>
+                  <td>{{repuesto.descripcion}}</td>
+
+                  <td>
+                    <a href="/repuestos/update/{{repuesto.id}}" class="btn btn-success">Actualizar</a>
+                    <a href="/repuestos/delete/{{repuesto.id}}" class="btn btn-danger confirmation">Eliminar</a>
+                  </td>
+
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+    {% else%}
+        <h1>No hay Repuestos registrados!</h1>
+    {% endif %}
+    
+  </div>
+</div>
+{% endblock %}

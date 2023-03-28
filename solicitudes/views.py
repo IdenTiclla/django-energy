@@ -5,9 +5,66 @@ from django.contrib import messages
 
 from empleados.models import Empleado
 from tecnicos.models import Tecnico
-from solicitudes.models import Solicitud
+from solicitudes.models import Solicitud, Repuesto, SolucionRepuesto
 # Create your views here.
 
+# repuestos
+
+def repuestos(request):
+    if request.method == "GET":
+        repuestos = Repuesto.objects.all()
+        return render(request, "repuestos/repuestos.html", {
+            'repuestos': repuestos,
+        })
+    
+    elif request.method == "POST":
+        print(request.POST)
+        nombre = request.POST['nombre']
+        descripcion = request.POST['descripcion']
+
+        repuesto = Repuesto.objects.filter(nombre=nombre)
+        if repuesto:
+            messages.add_message(request=request, level=messages.SUCCESS, message="Repuesto ya existe")    
+            return redirect('/repuestos')
+        else:
+            repuesto = Repuesto(nombre=nombre, descripcion=descripcion)
+            repuesto.save()
+            messages.add_message(request=request, level=messages.SUCCESS, message="Repuesto agregado correctamente!")
+            return redirect('/repuestos')
+        
+
+def actualizar_repuesto(request, repuesto_id):
+    repuesto = Repuesto.objects.get(id=repuesto_id)
+
+    if request.method == "GET":
+        return render(request, "repuestos/actualizar_repuesto.html", {
+            'repuesto': repuesto,
+        })
+    
+    elif request.method == "POST":
+
+        nombre = request.POST['nombre']
+        descripcion = request.POST['descripcion']
+        
+
+        repuesto.nombre = nombre
+        repuesto.descripcion = descripcion
+
+
+        repuesto.save()
+        messages.add_message(request=request, level=messages.SUCCESS, message="Repuesto Actualizado exitosamente!")
+        return redirect('/repuestos')
+
+
+def eliminar_repuesto(request, repuesto_id):
+    repuesto = Repuesto.objects.get(id=repuesto_id)
+    repuesto.delete()
+
+    messages.add_message(request=request, level=messages.SUCCESS, message="Repuesto Eliminado exitosamente!")
+
+    return redirect("/repuestos")
+
+# solicitudes
 def realizar_solicitud(request):
     if request.method == "GET":
 
@@ -77,3 +134,16 @@ def poner_solicitud_en_progreso(request, solicitud_id):
     solicitud.save()
     messages.add_message(request=request, level=messages.SUCCESS, message="Solicitud puesta en  progreso!")
     return redirect('/solicitudes_en_progreso')
+
+
+def agregar_solucion(request, solicitud_id):
+    solicitud = Solicitud.objects.get(id=solicitud_id)
+    if request.method == "GET":
+        print(solicitud_id)
+        print(solicitud)
+        return render(request, "solicitudes/agregar_solucion_solicitud.html", {
+            'solicitud': solicitud
+        })
+    elif request.method == "POST":
+        print(request.POST)
+        return redirect(f'/agregar_solucion/solicitud/{solicitud.id}')

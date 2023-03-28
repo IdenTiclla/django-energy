@@ -1,0 +1,43 @@
+{% extends 'layouts/base.html' %}
+
+{% block content %}
+<h1>Agregando solucion a: {{solicitud.nombre_equipo}} - {{solicitud.problema}} del empleado: {{solicitud.empleado.nombre}} {{solicitud.empleado.apellido}}</h1>
+<div class="row">
+  <div class="col-md-5">
+    <form action="/agregar_solucion/solicitud/{{solicitud.id}}" method="post">
+      {% csrf_token %}
+
+      <div class="form-group">
+        <label for="">Fallas Reales</label>
+        <div class="form-floating">
+            <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea" name="fallas_reales"></textarea>
+        </div>  
+      </div>
+
+      <div class="form-group">
+        <label for="">Solucion Realizada</label>
+        <div class="form-floating">
+            <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea" name="solucion_realizada"></textarea>
+        </div>  
+      </div>
+
+
+      <div class="form-group">
+        <label for="sueldo">Seleccione los repuestos</label>
+        <select name="repuestos_id" class="form-select" multiple aria-label="Default select example">
+
+          {% for repuesto in repuestos %}
+            <option value="{{repuesto.id}}">{{repuesto.nombre}}</option>
+          
+          {% endfor %}
+        </select>
+      </div>
+
+    
+
+      <button type="submit">Agregar Solucion</button>
+    </form>
+  </div>
+  
+</div>
+{% endblock %}

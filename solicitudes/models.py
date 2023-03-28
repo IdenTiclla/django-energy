@@ -20,13 +20,24 @@ class Solucion(models.Model):
 class Repuesto(models.Model):
     nombre = models.CharField(max_length=50)
     descripcion = models.CharField(max_length=100)
-    solucion = models.ForeignKey(Solucion, on_delete=models.CASCADE)
 
     def __str__(self) -> str:
         return f"<{self.nombre}>"
     
     class Meta:
         db_table = "Repuesto"
+
+
+class SolucionRepuesto(models.Model):
+    solucion = models.ForeignKey(Solucion, on_delete=models.CASCADE)
+    repuesto = models.ForeignKey(Repuesto, on_delete=models.CASCADE)
+
+    def __str__(self) -> str:
+        return f"<{self.solucion.fallas_reales} - {self.repuesto.nombre}>"
+
+
+    class Meta:
+        db_table = "SolucionRepuesto"
 
 
 class Solicitud(models.Model):
