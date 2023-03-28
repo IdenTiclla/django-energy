@@ -5,7 +5,7 @@ from django.contrib import messages
 
 from empleados.models import Empleado
 from tecnicos.models import Tecnico
-from solicitudes.models import Solicitud, Repuesto, SolucionRepuesto
+from solicitudes.models import Solicitud, Repuesto, Solucion, SolucionRepuesto
 # Create your views here.
 
 # repuestos
@@ -138,12 +138,35 @@ def poner_solicitud_en_progreso(request, solicitud_id):
 
 def agregar_solucion(request, solicitud_id):
     solicitud = Solicitud.objects.get(id=solicitud_id)
+    repuestos = Repuesto.objects.all()
     if request.method == "GET":
         print(solicitud_id)
         print(solicitud)
         return render(request, "solicitudes/agregar_solucion_solicitud.html", {
-            'solicitud': solicitud
+            'solicitud': solicitud,
+            'repuestos': repuestos
         })
     elif request.method == "POST":
         print(request.POST)
+        fallas_reales = request.POST['fallas_reales']
+        solucion_realizada = request.POST['solucion_realizada']
+        solucion = Solucion(fallas_reales=fallas_reales, solucion_realizada=solucion_realizada)
+        solucion.save()
+        
+        solicitud.solucion = solucion
+        solicitud.save()
+        # si nos pasaron los repuestos entonces debemos guardarlos
+        if 'repuestos_id' in request.POST:
+            print("se pasaron los repuestos") 
+            repuestos_id = request.POST['repuestos_id']
+            for repuesto_id in repuestos_id:
+                print(repuesto_id)
+                repuesto = Repuesto.objects.get(id=repuesto_id)
+                solucion_repuesto = SolucionRepuesto(solucion=solucion, repuesto=repuesto)
+                solucion_repuesto.save()
+
+        solicitud.estado = "Pendiente aprobacion"
+        solicitud.save()
+
+
         return redirect(f'/agregar_solucion/solicitud/{solicitud.id}')
