@@ -124,6 +124,12 @@ def solicitudes_en_progreso(request):
         'solicitudes': solicitudes
     })
 
+def solicitudes_pendiente_aprobacion(request):
+    solicitudes = Solicitud.objects.filter(estado="Pendiente aprobacion")
+    return render(request, "solicitudes/sistemas_solicitudes_pendientes_de_aprobacion.html", {
+        'solicitudes': solicitudes
+    })
+
 
 def poner_solicitud_en_progreso(request, solicitud_id):
     solicitud = Solicitud.objects.get(id=solicitud_id)

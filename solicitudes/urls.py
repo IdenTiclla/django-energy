@@ -20,7 +20,7 @@ urlpatterns = [
 
 
     path('solicitudes_en_progreso', views.solicitudes_en_progreso),
-
+    path("solicitudes_pendiente_aprobacion", views.solicitudes_pendiente_aprobacion),
 
     # para soporte cambiar los estados
 
