@@ -38,5 +38,20 @@
 {% endif %}
 
 
+{% if solicitud.estado == 'Pendiente aprobacion' or solicitud.estado == "Solucionado" %}
+    <h1>Solucion</h1>
+    <p>{{solicitud.solucion.fallas_reales}}</p>
+    <p>{{solicitud.solucion.solucion_realizada}}</p>
+
+{% endif %}
+
+
+{% if request.user.rol == 'JefeSoporte' %}
+    {% if solicitud.estado == 'Pendiente aprobacion' %}
+        <a href="/aprobar/solicitud/{{solicitud.id}}" class="btn btn-primary btn-big">Aprobar solucion</a>
+    {% endif %}
+
+{% endif %}
+
 
 {% endblock %}

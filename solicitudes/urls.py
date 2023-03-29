@@ -18,9 +18,11 @@ urlpatterns = [
 
     path('ver/solicitud/<int:solicitud_id>', views.ver_solicitud),
 
-
+    # filtro de solicitudes
     path('solicitudes_en_progreso', views.solicitudes_en_progreso),
     path("solicitudes_pendiente_aprobacion", views.solicitudes_pendiente_aprobacion),
+    path("solicitudes_aprobadas", views.solicitudes_aprobadas),
+
 
     # para soporte cambiar los estados
 
@@ -28,6 +30,10 @@ urlpatterns = [
     
     # agregar solucion a solicitud
     path("agregar_solucion/solicitud/<int:solicitud_id>", views.agregar_solucion),
+
+    # Para rol Jefe Soporte
+    path("aprobar/solicitud/<int:solicitud_id>", views.aprobar_solicitud),
+
 
 
     

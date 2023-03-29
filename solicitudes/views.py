@@ -130,6 +130,12 @@ def solicitudes_pendiente_aprobacion(request):
         'solicitudes': solicitudes
     })
 
+def solicitudes_aprobadas(request):
+    solicitudes = Solicitud.objects.filter(estado='Aprobada')
+    return render(request, "solicitudes/sistemas_solicitudes_aprobadas.html", {
+        'solicitudes': solicitudes
+    })
+
 
 def poner_solicitud_en_progreso(request, solicitud_id):
     solicitud = Solicitud.objects.get(id=solicitud_id)
@@ -174,5 +180,16 @@ def agregar_solucion(request, solicitud_id):
         solicitud.estado = "Pendiente aprobacion"
         solicitud.save()
 
+        messages.add_message(request=request, level=messages.SUCCESS, message="Solucion agregada solicitud pendiente de aprobacion!")
+        return redirect('/solicitudes_aprobadas')
+    
 
-        return redirect(f'/agregar_solucion/solicitud/{solicitud.id}')
+def aprobar_solicitud(request, solicitud_id):
+    print(solicitud_id)
+    solicitud = Solicitud.objects.get(id=solicitud_id)
+    
+    # cambiando el estado a En progreso
+    solicitud.estado = "Aprobada"
+    solicitud.save()
+    messages.add_message(request=request, level=messages.SUCCESS, message="Solicitud aprobada!")
+    return redirect('/solicitudes_aprobadas')

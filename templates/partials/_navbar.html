@@ -46,7 +46,7 @@
 
           <li><a class="dropdown-item" href="/solicitudes_pendiente_aprobacion">Solicitudes pendiente aprobacion</a></li>
 
-          <li><a class="dropdown-item" href="/solicitudes_pendiente_aprobacion">Solicitudes aprobadas</a></li>
+          <li><a class="dropdown-item" href="/solicitudes_aprobadas">Solicitudes aprobadas</a></li>
         </ul>
       </li>
 
@@ -77,15 +77,28 @@
 
           <li><a class="dropdown-item" href="/solicitudes_pendiente_aprobacion">Solicitudes pendiente aprobacion</a></li>
 
-          <li><a class="dropdown-item" href="/solicitudes_pendiente_aprobacion">Solicitudes aprobadas</a></li>
+          <li><a class="dropdown-item" href="/solicitudes_aprobadas">Solicitudes aprobadas</a></li>
         </ul>
       </li>
       {% endif %}
 
 
       {% if request.user.rol == 'JefeSoporte' %}
-      <li class="nav-item">
-        <a class="nav-link" href="#">JefeSoporte feature</a>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Solicitudes
+        </a>
+        <ul class="dropdown-menu">
+          
+
+          <li><a class="dropdown-item" href="/solicitudes_realizadas">Solicitudes Realizadas</a></li>
+
+          <li><a class="dropdown-item" href="/solicitudes_en_progreso">Solicitudes En progreso</a></li>
+
+          <li><a class="dropdown-item" href="/solicitudes_pendiente_aprobacion">Solicitudes pendiente aprobacion</a></li>
+
+          <li><a class="dropdown-item" href="/solicitudes_aprobadas">Solicitudes aprobadas</a></li>
+        </ul>
       </li>
       {% endif %}
 

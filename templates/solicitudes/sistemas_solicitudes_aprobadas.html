@@ -7,7 +7,7 @@
 {% endblock %}
 
 {% block content %}
-<h1>Solicitudes en pendientes de aprobacion</h1>
+<h1>Solicitudes Aprobadas</h1>
 <div class="container">
     {% if solicitudes|length > 0 %}
     {% for solicitud in solicitudes %}
@@ -22,7 +22,7 @@
         </div>
     {% endfor %}
     {% else %}
-        <h1>No hay solicitudes pendientes de aprobacion..</h1>
+        <h1>No hay solicitudes en aprobadas..</h1>
     {% endif %}
 </div>
 {% endblock %}
