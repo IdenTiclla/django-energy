@@ -112,10 +112,17 @@ def solicitudes_realizadas(request):
 
 def ver_solicitud(request, solicitud_id):
     solicitud = Solicitud.objects.get(id=solicitud_id)
-    print(solicitud_id)
     print(solicitud)
+    # solicitudrepuestos = solicitud.solucion.solucionrepuesto_set.all()
+    solicitudrepuestos = SolucionRepuesto.objects.filter(solucion=solicitud.solucion).all()
+    
+    repuestos = []
+    for solicitudrepuesto in solicitudrepuestos:
+
+        repuestos.append(solicitudrepuesto.repuesto)
     return render(request, "solicitudes/ver_solicitud.html", {
-        'solicitud': solicitud
+        'solicitud': solicitud,
+        'repuestos': repuestos
     })
 
 def solicitudes_en_progreso(request):
@@ -170,7 +177,8 @@ def agregar_solucion(request, solicitud_id):
         # si nos pasaron los repuestos entonces debemos guardarlos
         if 'repuestos_id' in request.POST:
             print("se pasaron los repuestos") 
-            repuestos_id = request.POST['repuestos_id']
+            # repuestos_id = request.POST['repuestos_id']
+            repuestos_id = request.POST.getlist('repuestos_id')
             for repuesto_id in repuestos_id:
                 print(repuesto_id)
                 repuesto = Repuesto.objects.get(id=repuesto_id)
@@ -181,7 +189,7 @@ def agregar_solucion(request, solicitud_id):
         solicitud.save()
 
         messages.add_message(request=request, level=messages.SUCCESS, message="Solucion agregada solicitud pendiente de aprobacion!")
-        return redirect('/solicitudes_aprobadas')
+        return redirect('/solicitudes_pendiente_aprobacion')
     
 
 def aprobar_solicitud(request, solicitud_id):

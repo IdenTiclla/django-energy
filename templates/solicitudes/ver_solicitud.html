@@ -38,10 +38,26 @@
 {% endif %}
 
 
-{% if solicitud.estado == 'Pendiente aprobacion' or solicitud.estado == "Solucionado" %}
+{% if solicitud.estado == 'Pendiente aprobacion' or solicitud.estado == "Aprobada" %}
     <h1>Solucion</h1>
+    <h4>Fallas reales</h4>
     <p>{{solicitud.solucion.fallas_reales}}</p>
+    <h4>Solucion realizada</h4>
+    
     <p>{{solicitud.solucion.solucion_realizada}}</p>
+
+    {% if repuestos %}
+        
+        <h4>Repuestos usados</h4>
+
+        <ul>
+            {% for repuesto in repuestos %}
+                <li>{{repuesto.nombre}}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+    No se ocuparon repuestos
+    {% endif %}
 
 {% endif %}
 

@@ -9,17 +9,21 @@
 {% block content %}
 <h1>Solicitudes realizadas</h1>
 <div class="container">
+    {% if solicitudes|length > 0 %}
 
-    {% for solicitud in solicitudes %}
-        <div class="card" style="width: 18rem;">
-            <div class="card-body">
-            <h5 class="card-title">Equipo: {{solicitud.nombre_equipo}}</h5>
-            <h5 class="card-title">Empleado: {{solicitud.empleado.nombre}} {{solicitud.empleado.apellido}} </h5>
-            <h5 class="card-title">Tecnico: {{solicitud.tecnico.nombre}} {{solicitud.tecnico.apellido}} </h5>
-            <p class="card-text">{{solicitud.descripcion}}</p>
-            <a href="ver/solicitud/{{solicitud.id}}" class="btn btn-primary">Ver solicitud</a>
+        {% for solicitud in solicitudes %}
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                <h5 class="card-title">Equipo: {{solicitud.nombre_equipo}}</h5>
+                <h5 class="card-title">Empleado: {{solicitud.empleado.nombre}} {{solicitud.empleado.apellido}} </h5>
+                <h5 class="card-title">Tecnico: {{solicitud.tecnico.nombre}} {{solicitud.tecnico.apellido}} </h5>
+                <p class="card-text">{{solicitud.descripcion}}</p>
+                <a href="ver/solicitud/{{solicitud.id}}" class="btn btn-primary">Ver solicitud</a>
+                </div>
             </div>
-        </div>
-    {% endfor %}
+        {% endfor %}
+    {% else %}
+        <h1>No hay solicitudes en realizadas..</h1>
+    {% endif %}
 </div>
 {% endblock %}
